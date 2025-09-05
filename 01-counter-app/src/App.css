@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  background-color: #174a61;
+  height: 100vh;
+}
+
+.main h1 {
+  background-color: #976cb6;
+  font-size: 3rem;
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0;
+  color: #fff;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.displayContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1rem;
+  width: 350px;
+  height: 350px;
+  background-color: #976cb6;
+}
+
+.display {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 3.5rem;
+  font-weight: 600;
+}
+
+.btn,
+.resetBtn {
+  border: none;
+  outline: none;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.btn {
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+}
+
+.resetBtn {
+  width: 120px;
+  height: 50px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.counter {
+  color: #fff;
+}
+
+.checkBox {
+  color: #fff;
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.checkBox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.stepSize {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.stepSize input {
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  font-size: 1rem;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.stepSize input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.6);
+}
+
+.stepSize input:hover {
+  background-color: #f0f0f0;
+}
+
+
+.footer {
+  background-color: #174a61;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  color: #fff;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-links a:hover {
+  transform: scale(1.2);
+  color: #4caf50; /* or purple #976cb6 to match theme */
+}
+
+.social-links img {
+  width: 24px;
+  height: 24px;
+  filter: invert(100%); /* makes dark icons white */
+  transition: transform 0.2s ease;
+}
+
+.social-links img:hover {
+  transform: scale(1.2);
+}
