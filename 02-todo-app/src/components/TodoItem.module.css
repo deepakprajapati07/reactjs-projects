@@ -1,0 +1,155 @@
+.todoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+
+.todo {
+  display: flex;
+  gap: 10px;
+  justify-content:flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 0.9rem;
+}
+
+.todo input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #1a8910;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.todo input[type="checkbox"]:hover {
+  border-color: #0f5d07;
+  box-shadow: 0 0 5px rgba(26, 137, 16, 0.5);
+}
+
+.todo input[type="checkbox"]:checked {
+  background-color: #1a8910;
+  border-color: #1a8910;
+}
+
+.todo input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+
+.todo input[type="text"] {
+  width: 80%;
+  height: 25px;
+  border-radius: 0.5rem;
+  padding: 0 10px;
+  border: 1px solid #1a8910;
+}
+
+.todo input[type="text"]:focus {
+  outline: none;
+  border: 1.5px solid #1a8910;
+  background-color: #e5e8eb;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #dc3545;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.deleteBtn:hover {
+  color: #a71d2a;
+  transform: scale(1.2);
+}
+
+.deleteBtn:active {
+  transform: scale(0.95);
+}
+
+.saveBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #1a8910;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.saveBtn:hover {
+  color: #0f5d07;
+  transform: scale(1.2);
+}
+
+.saveBtn:active {
+  transform: scale(0.95);
+}
+
+.editBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #0d6efd;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.editBtn:hover {
+  color: #0a58ca;
+  transform: scale(1.2);
+}
+
+.editBtn:active {
+  transform: scale(0.95);
+}
+
+.cancelBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #6c757d;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.cancelBtn:hover {
+  color: #495057;
+  transform: scale(1.2);
+}
+
+.cancelBtn:active {
+  transform: scale(0.95);
+}
