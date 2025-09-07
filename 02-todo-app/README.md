@@ -20,3 +20,5 @@ This is a simple todo application built with React.
 - React
 - Vite
 - CSS
+
+[Live Demo](https://todo-app-dkp.vercel.app/)

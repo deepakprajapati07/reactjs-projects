@@ -10,7 +10,10 @@ const TodoList = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClearCompleted = () => setShowModal(true);
-  const confirmClear = () => { clearCompleted(); setShowModal(false); };
+  const confirmClear = () => {
+    clearCompleted();
+    setShowModal(false);
+  };
   const cancelClear = () => setShowModal(false);
 
   // Split todos
@@ -22,16 +25,19 @@ const TodoList = () => {
       <div className={styles.todoListContainer}>
         <CurrentDate />
 
-        <p className={styles.remaining}>
-          {remainingCount} task{remainingCount !== 1 ? "s" : ""} remaining
-        </p>
-
-        {/* Active / incomplete todos */}
-        {incompleteTodos.length === 0 ? (
+        {/* Status message */}
+        {incompleteTodos.length === 0 && completedTodos.length === 0 ? (
           <p className={styles.remaining}>No active todos!</p>
         ) : (
-          incompleteTodos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
+          <p className={styles.remaining}>
+            {remainingCount} task{remainingCount !== 1 ? "s" : ""} remaining
+          </p>
         )}
+
+        {/* Active / incomplete todos */}
+        {incompleteTodos.map((todo) => (
+          <TodoItem key={todo.id} todo={todo} />
+        ))}
 
         {/* Clear Completed button */}
         {completedTodos.length > 0 && (
