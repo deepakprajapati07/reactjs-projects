@@ -47,7 +47,7 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
       const res = await fetch(url);
       const raw = await res.json();
 
-      // 🔹 Clean & map data
+      // Clean & map data
       const cleaned: WeatherData = {
         current: raw.current
           ? {

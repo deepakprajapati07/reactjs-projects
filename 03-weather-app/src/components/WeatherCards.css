@@ -1,0 +1,47 @@
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card.day {
+  background: linear-gradient(to bottom, #cce7ff, #eaf6ff);
+}
+
+.card.night {
+  background: linear-gradient(to bottom, #2c3e50, #34495e);
+  color: #fff;
+}
+
+.card.small {
+  min-width: 120px;
+}
+
+.temp {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.hourly-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.daily-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.day {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
