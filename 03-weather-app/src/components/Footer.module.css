@@ -20,16 +20,5 @@
 
 .socialLinks a:hover {
   transform: scale(1.2);
-  color: #976cb6;
-}
-
-.socialLinks img {
-  width: 24px;
-  height: 24px;
-  filter: invert(100%);
-  transition: transform 0.2s ease;
-}
-
-.socialLinks img:hover {
-  transform: scale(1.2);
+  color: #ffdd57;
 }

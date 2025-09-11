@@ -1,0 +1,60 @@
+.hourlyScroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #90caf9 transparent;
+  /* border: 1px solid red; */
+}
+
+.hourlyScroll::-webkit-scrollbar {
+  height: 8px;
+}
+.hourlyScroll::-webkit-scrollbar-thumb {
+  background: #90caf9;
+  border-radius: 4px;
+}
+
+.hourCard {
+  flex: 0 0 150px;
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.hourCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.time {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.temp {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e53935;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.humidity,
+.precip,
+.wind {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin: 0.2rem 0;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useWeatherStore } from "../store/weatherStore";
 import CurrentWeatherCard from "./CurrentWeatherCard";
 import HourlyWeatherCard from "./HourlyWeatherCard";
@@ -7,43 +7,34 @@ import styles from "./WeatherDashboard.module.css";
 
 const WeatherDashboard = () => {
   const { data, loading, error, fetchWeather } = useWeatherStore();
-  const [activeTab, setActiveTab] = useState<"hourly" | "daily" | null>(null);
 
   useEffect(() => {
     fetchWeather(25.5941, 85.1356); // Patna
   }, [fetchWeather]);
 
-  if (loading) return <p>Loading weather...</p>;
-  if (error) return <p>{error}</p>;
+  useEffect(() => {
+    if (data?.current) {
+      document.body.classList.toggle("night", data.current.is_day === 0);
+    }
+  }, [data]);
+
+  if (loading) return <p className={styles.loading}>Loading weather...</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
 
   return (
     <div className={styles.dashboard}>
       <section className={styles.currentWeather}>
-        <h2>Current Weather</h2>
         <CurrentWeatherCard current={data.current} />
       </section>
 
-      <section className={styles.otherTab}>
-        <div className={styles.tabButtons}>
-          <button
-            className={activeTab === "hourly" ? styles.activeBtn : ""}
-            onClick={() => setActiveTab("hourly")}
-          >
-            Hourly Forecast
-          </button>
-          <button
-            className={activeTab === "daily" ? styles.activeBtn : ""}
-            onClick={() => setActiveTab("daily")}
-          >
-            Daily Forecast
-          </button>
-        </div>
+      <section className={styles.hourlySection}>
+        <h2>Hourly Forecast</h2>
+        <HourlyWeatherCard hourly={data.hourly} />
+      </section>
 
-        <div className={styles.tabContent}>
-          {activeTab === "hourly" && <HourlyWeatherCard hourly={data.hourly} />}
-          {activeTab === "daily" && <DailyWeatherCard daily={data.daily} />}
-          {!activeTab && <p>Select a tab above</p>}
-        </div>
+      <section className={styles.dailySection}>
+        <h2>Daily Forecast</h2>
+        <DailyWeatherCard daily={data.daily} />
       </section>
     </div>
   );
