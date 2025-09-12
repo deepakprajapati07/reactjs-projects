@@ -5,7 +5,6 @@
   padding: 1rem 0.5rem;
   scrollbar-width: thin;
   scrollbar-color: #90caf9 transparent;
-  /* border: 1px solid red; */
 }
 
 .hourlyScroll::-webkit-scrollbar {
@@ -32,6 +31,16 @@
   box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
+.day {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #212121;
+}
+
+.night {
+  background: linear-gradient(135deg, #283593, #1a237e);
+  color: #f5f5f5;
+}
+
 .time {
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -40,7 +49,6 @@
 .temp {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #e53935;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,3 +66,11 @@
   gap: 0.3rem;
   margin: 0.2rem 0;
 }
+
+.dayLabel {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem 0 0.5rem;
+  color: var(--text-primary, #333);
+}
+

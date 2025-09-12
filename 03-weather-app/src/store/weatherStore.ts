@@ -1,30 +1,40 @@
 import { create } from "zustand";
 
+interface CurrentWeather {
+  temperature: number;
+  is_day: number;
+  wind_speed: number;
+  wind_direction: number;
+  precipitation_probability: number | null;
+  raw_time: string;   // new → raw ISO timestamp
+  date: string;       // new → formatted "Friday, 12 September"
+}
+
+interface HourlyWeather {
+  raw_time: string[]; // new → original ISO array
+  time: string[];     // formatted "12/09/2025"
+  temperature: number[];
+  is_day: number[];
+  wind_speed: number[];
+  wind_direction: number[];
+  precipitation_probability: number[];
+  relative_humidity: number[];
+}
+
+interface DailyWeather {
+  raw_time: string[]; // new → original ISO date array
+  time: string[];     // formatted "12 September"
+  max_temp: number[];
+  min_temp: number[];
+  precipitation_hours: number[];
+  sunrise: string[];
+  sunset: string[];
+}
+
 interface WeatherData {
-  current: {
-    temperature: number;
-    is_day: number;
-    wind_speed: number;
-    wind_direction: number;
-    precipitation_probability: number | null;
-  } | null;
-  hourly: {
-    time: string[];
-    temperature: number[];
-    is_day: number[];
-    wind_speed: number[];
-    wind_direction: number[];
-    precipitation_probability: number[];
-    relative_humidity: number[];
-  } | null;
-  daily: {
-    time: string[];
-    max_temp: number[];
-    min_temp: number[];
-    precipitation_hours: number[];
-    sunrise: string[];
-    sunset: string[];
-  } | null;
+  current: CurrentWeather | null;
+  hourly: HourlyWeather | null;
+  daily: DailyWeather | null;
 }
 
 interface WeatherStore {
@@ -33,6 +43,11 @@ interface WeatherStore {
   error: string | null;
   fetchWeather: (lat: number, lon: number) => Promise<void>;
 }
+
+// 🔹 Helper for formatting
+const formatDate = (dateStr: string, options: Intl.DateTimeFormatOptions) => {
+  return new Date(dateStr).toLocaleDateString("en-GB", options);
+};
 
 export const useWeatherStore = create<WeatherStore>((set) => ({
   data: { current: null, hourly: null, daily: null },
@@ -47,7 +62,6 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
       const res = await fetch(url);
       const raw = await res.json();
 
-      // Clean & map data
       const cleaned: WeatherData = {
         current: raw.current
           ? {
@@ -55,12 +69,29 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
               is_day: raw.current.is_day,
               wind_speed: raw.current.wind_speed_10m,
               wind_direction: raw.current.wind_direction_10m,
-              precipitation_probability: raw.hourly?.precipitation_probability?.[0] ?? null, // since not in current
+              precipitation_probability:
+                raw.hourly?.precipitation_probability?.[0] ?? null,
+
+              // store both raw and formatted date
+              raw_time: raw.hourly.time[0],
+              date: formatDate(raw.hourly.time[0], {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+              }), // e.g. "Friday, 12 September"
             }
           : null,
+
         hourly: raw.hourly
           ? {
-              time: raw.hourly.time,
+              raw_time: raw.hourly.time,
+              time: raw.hourly.time.map((t: string) =>
+                formatDate(t, {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })
+              ), // e.g. "12/09/2025"
               temperature: raw.hourly.temperature_2m,
               is_day: raw.hourly.is_day,
               wind_speed: raw.hourly.wind_speed_10m,
@@ -69,9 +100,13 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
               relative_humidity: raw.hourly.relative_humidity_2m,
             }
           : null,
+
         daily: raw.daily
           ? {
-              time: raw.daily.time,
+              raw_time: raw.daily.time,
+              time: raw.daily.time.map((d: string) =>
+                formatDate(d, { day: "numeric", month: "long" })
+              ), // e.g. "12 September"
               max_temp: raw.daily.temperature_2m_max,
               min_temp: raw.daily.temperature_2m_min,
               precipitation_hours: raw.daily.precipitation_hours,
@@ -84,7 +119,7 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
       set({ data: cleaned, loading: false });
     } catch (err) {
       set({ error: "Failed to fetch weather data", loading: false });
-      console.log(err);
+      console.error(err);
     }
   },
 }));

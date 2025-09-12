@@ -5,38 +5,27 @@
   padding: 1rem;
   max-width: 450px;
   margin: auto;
-  /* border: 2px solid red; */
 }
 
-/* Current Weather */
 .currentWeather {
-  /* padding: 0.5rem; */
-  /* border-radius: 16px; */
-  /* background: var(--card-bg); */
-  /* box-shadow: 0 4px 12px rgba(0,0,0,0.15); */
-  /* border: 2px solid red; */
   cursor: pointer;
 }
 
-/* Sections */
 .hourlySection,
 .dailySection {
   background: var(--card-bg);
-  /* backdrop-filter: blur(6px); */
   padding: 1rem;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  /* border: 2px solid red; */
 }
 
 .hourlySection h2,
 .dailySection h2 {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
-/* Loader & Error */
 .loading,
 .error {
   text-align: center;

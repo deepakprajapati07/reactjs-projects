@@ -8,6 +8,8 @@ interface CurrentWeather {
   wind_speed: number;
   wind_direction: number;
   precipitation_probability: number | null;
+  raw_time: string;   // new → raw ISO timestamp
+  date: string;       // new → formatted "Friday, 12 September"
 }
 
 interface Props {
@@ -36,12 +38,12 @@ const CurrentWeatherCard = ({ current }: Props) => {
       <h2>Current Weather</h2>
       <h3
         className={`${styles.temp} ${
-          current.temperature > 35 ? styles.hot : styles.cool
+          current.temperature > 30 ? styles.hot : styles.cool
         }`}
       >
         {tempIcon} {current.temperature}°C
       </h3>
-
+          <p><strong>{current.date}</strong></p>
       <p>
         <strong><WiStrongWind size={22} />Wind:</strong> {current.wind_speed} km/h (
         {getWindDirection(current.wind_direction)})

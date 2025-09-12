@@ -3,7 +3,8 @@ import { FaSun, FaMoon, FaCloudRain, FaTemperatureHigh, FaTemperatureLow } from 
 
 interface Props {
   daily: {
-    time: string[];
+    raw_time: string[]; // ISO date array
+    time: string[];     // formatted "12 September"
     max_temp: number[];
     min_temp: number[];
     precipitation_hours: number[];
@@ -17,9 +18,15 @@ const DailyWeatherCard = ({ daily }: Props) => {
 
   return (
     <div className={styles.dailyGrid}>
-      {daily.time.slice(0, 7).map((day, i) => {
-        const date = new Date(day);
+      {daily.raw_time.slice(0, 7).map((raw, i) => {
+        const date = new Date(raw);
+
+        // Weekday (Mon, Tue, ...)
         const weekday = date.toLocaleDateString("en-US", { weekday: "short" });
+
+        // Formatted date (from store → "12 September")
+        const formattedDate = daily.time[i];
+
         const sunrise = new Date(daily.sunrise[i]).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -30,8 +37,11 @@ const DailyWeatherCard = ({ daily }: Props) => {
         });
 
         return (
-          <div key={day} className={styles.card}>
-            <p className={styles.day}>{weekday}</p>
+          <div key={raw} className={styles.card}>
+            {/* Weekday + date */}
+            <p className={styles.day}>
+              {weekday}, {formattedDate}
+            </p>
 
             <div className={styles.temps}>
               <p className={styles.max}>

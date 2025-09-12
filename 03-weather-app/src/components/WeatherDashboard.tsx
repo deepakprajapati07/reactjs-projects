@@ -12,12 +12,6 @@ const WeatherDashboard = () => {
     fetchWeather(25.5941, 85.1356); // Patna
   }, [fetchWeather]);
 
-  useEffect(() => {
-    if (data?.current) {
-      document.body.classList.toggle("night", data.current.is_day === 0);
-    }
-  }, [data]);
-
   if (loading) return <p className={styles.loading}>Loading weather...</p>;
   if (error) return <p className={styles.error}>{error}</p>;
 
